@@ -4,7 +4,7 @@
   "description": "rest app made with typescript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon dist/app.js"
   },
   "author": "vijay kc",
   "license": "ISC",
