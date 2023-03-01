@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateTodo = exports.getTodos = exports.createTodo = void 0;
+exports.deleteTodo = exports.updateTodo = exports.getTodos = exports.createTodo = void 0;
 const todo_1 = __importDefault(require("../models/todo"));
 // const TODOS: Todo[] = []; ** Used for local, without Mongodb
 const createTodo = async (req, res, next) => {
@@ -64,3 +64,16 @@ exports.updateTodo = updateTodo;
 //   }
 //   res.json({ message: "Todo deleted" });
 // };
+const deleteTodo = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        let todos = await todo_1.default.findByIdAndDelete(id, req.body);
+        return res
+            .status(200)
+            .json({ message: "Todo deleted successfully!", data: todos });
+    }
+    catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
+exports.deleteTodo = deleteTodo;
